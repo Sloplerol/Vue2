@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>combo.com</title> 
+<style>
+a.one:link {color: black}
+a.one:visit {color: purple;}
+a.one:hover {color: blue;}
+
+a.two:link {color: blue;}
+a.two:visit {color: purple;}
+a.two:hover {background-color: palegreen;}
+
+a.three:link {color: black}
+a.three:visit {color: purple;}
+a.three:hover {font-size: 200%;}
+
+a.four:link {color: black}
+a.four:visit {color: purple;}
+a.four:hover {font-family: serif;}
+
+a.five:link {color: black;text-decoration: none;}
+a.five:visit {color: purple;text-decoration: none;}
+a.five:hover {text-decoration: underline;}
+
+ul.a {list-style-type: circle;}
+ul.b {list-style-type: square;}
+ol.c {list-style-type: upper-roman;}
+ol.d {list-style-type: lower-alpha;}
+ul.f
+{
+	list-style-image: url("/Users/satrol_/Pictures/tip.png");
+}
+ul.h
+{
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+table,th,td
+{
+	border: 1px solid green;
+}
+/*table
+{
+	border-collapse: collapse;
+	width: 30%;
+}*/
+th
+{
+	background-color: green;
+	color: white;
+	height:60px;
+}
+td
+{
+	text-align: center;
+	height: 40px;
+	vertical-align: bottom;
+	padding: 40px;
+}
+#example
+{
+	font-family: cursive;
+	wdith: 70%;
+	border-collapse: collapse;
+}
+#example th,#example td
+{
+	font-size: 25px;
+	border: 1px solid green;
+	padding: 20px;
+	text-align: left;
+}
+#example th
+{
+	font-size: 30px;
+	background-color: skyblue;
+	color: whitesmoke;
+}
+#example tr.alt td
+{
+	background-color: pink;
+	color: black;
+}
+div.ex
+{
+	margin: 0px;
+	border: 25px solid green;
+	width: 200px;
+	padding: 25px;
+}
+p.one
+{
+	border-left-style: solid;
+	border-right-style:solid ;
+	border-top-style:dotted ;
+	border-bottom-style:dotted ;
+	border-width: 3px;
+	border-color: skyblue;
+	width: 200px;
+	border-radius: 25px;
+	padding: 20px 40px;
+}
+</style>
+</head>
+<body>
+<h1><b><a class="one" href="https://www.runoob.com/try/try.php?filename=trycss_link" target="_blank">给连接上色</a></b></h1>
+<h1><b><a class="two" href="https://www.runoob.com/try/try.php?filename=trycss_link" target="_blank">给背景连接上色</a></b></h1>
+<h1><b><a class="three" href="https://www.runoob.com/try/try.php?filename=trycss_link" target="_blank">给字体放大</a></b></h1>
+<h1><b><a class="four" href="https://www.runoob.com/try/try.php?filename=trycss_link" target="_blank">更改字体</a></b></h1>
+<h1><b><a class="five" href="https://www.runoob.com/try/try.php?filename=trycss_link" target="_blank">触碰显示下划线</a></b></h1>
+<ul class="a">
+	<li>milk</li>
+	<li>coffee</li>
+	<li>water</li>
+</ul>
+<ul class="b">
+	<li>milk</li>
+	<li>coffee</li>
+	<li>water</li>
+</ul>
+<ol class="c">
+	<li>milk</li>
+	<li>coffee</li>
+	<li>water</li>
+</ol>
+<ol class="d">
+	<li>milk</li>
+	<li>coffee</li>
+	<li>water</li>
+</ol>
+<ul class="f">
+	<li>milk</li>
+	<li>coffee</li>
+	<li>water</li>
+</ul>
+<ul class="h">
+	<li>milk</li>
+	<li>coffee</li>
+	<li>water</li>
+</ul>
+<table>
+	<tr>
+		<th>food</th>
+		<th>fruit</th>
+	</tr>
+	<tr>
+		<td>hamburger</td>
+		<td>apple</td>
+	<tr>
+		<td>fish</td>
+		<td>banana</td>
+	</tr>
+</table>
+<table id="example">
+	<tr>
+		<th>Company</th>
+		<th>CPU,GPU</th>
+		<th>price</th>
+	</tr>
+	<tr>
+		<td>intel</td>
+		<td>i5</td>
+		<td>2000RMB</td>
+	</tr>
+	<tr class="alt">
+		<td>AMD</td>
+		<td>R5</td>
+		<td>2000RMB</td>
+	</tr>
+	<tr>
+		<td>NVIDIA</td>
+		<td>3090KS</td>
+		<td>10000RMB</td>
+	</tr>
+</table>
+<img src="/Users/satrol_/Pictures/relax.gif" width="300px" height="300px">
+<div class="ex">等宽度</div>
+<p class="one">实体线段</p>
+</body>
+</html>

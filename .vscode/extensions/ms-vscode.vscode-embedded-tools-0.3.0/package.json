@@ -1,0 +1,243 @@
+{
+	"name": "vscode-embedded-tools",
+	"displayName": "Embedded Tools",
+	"version": "0.3.0",
+	"description": "View registers and RTOS data when debugging embedded devices.",
+	"categories": [
+		"Debuggers"
+	],
+	"keywords": [
+		"embedded",
+		"debuggers",
+		"SVD",
+		"RTOS"
+	],
+	"bugs": {
+		"url": "https://github.com/microsoft/vscode-embedded-tools/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/microsoft/vscode-embedded-tools"
+	},
+	"license": "SEE LICENSE IN LICENSE.txt",
+	"qna": "https://github.com/microsoft/vscode-embedded-tools/issues",
+	"author": {
+		"name": "Microsoft Corporation"
+	},
+	"publisher": "ms-vscode",
+	"main": "./dist/extension.js",
+	"scripts": {
+		"build": "webpack --mode production",
+		"build:dev": "webpack --mode development",
+		"clean": "rimraf ./dist",
+		"lint": "eslint src --ext ts --max-warnings 0",
+		"rebuild:dev": "pnpm run build:dev",
+		"test": "",
+		"watch": "webpack --mode development --watch"
+	},
+	"contributes": {
+		"commands": [
+			{
+				"command": "vscode-embedded.webview.refreshRegisterView",
+				"title": "%vscode-embedded.webview.refreshRegisterView.title%",
+				"icon": "$(refresh)"
+			},
+			{
+				"command": "vscode-embedded.rtosViewer.threads",
+				"title": "%vscode-embedded.rtosViewer.threads.title%"
+			},
+			{
+				"command": "vscode-embedded.rtosViewer.timers",
+				"title": "%vscode-embedded.rtosViewer.timers.title%"
+			},
+			{
+				"command": "vscode-embedded.rtosViewer.queues",
+				"title": "%vscode-embedded.rtosViewer.queues.title%"
+			},
+			{
+				"command": "vscode-embedded.rtosViewer.semaphores",
+				"title": "%vscode-embedded.rtosViewer.semaphores.title%"
+			},
+			{
+				"command": "vscode-embedded.rtosViewer.mutexes",
+				"title": "%vscode-embedded.rtosViewer.mutexes.title%"
+			},
+			{
+				"command": "vscode-embedded.rtosViewer.eventFlags",
+				"title": "%vscode-embedded.rtosViewer.eventFlags.title%"
+			},
+			{
+				"command": "vscode-embedded.rtosViewer.blockPools",
+				"title": "%vscode-embedded.rtosViewer.blockPools.title%"
+			},
+			{
+				"command": "vscode-embedded.rtosViewer.bytePools",
+				"title": "%vscode-embedded.rtosViewer.bytePools.title%"
+			},
+			{
+				"command": "vscode-embedded.convertStProject",
+				"title": "%vscode-embedded.convertStProject.title%"
+			},
+			{
+				"command": "vscode-embedded.openWithStm32CubeMx",
+				"title": "%vscode-embedded.openWithStm32CubeMx.title%"
+			}
+		],
+		"configuration": {
+			"title": "%vscode-embedded.contributes.configuration.title%",
+			"properties": {
+				"vscode-embedded.loggingVerbosity": {
+					"type": "string",
+					"description": "%vscode-embedded.loggingVerbosity%",
+					"enum": [
+						"off",
+						"error",
+						"warn",
+						"info",
+						"debug"
+					],
+					"default": "warn"
+				}
+			}
+		},
+		"menus": {
+			"view/title": [
+				{
+					"command": "vscode-embedded.webview.refreshRegisterView",
+					"when": "view == vscode-embedded.webview.registerView",
+					"group": "navigation"
+				},
+				{
+					"command": "vscode-embedded.rtosViewer.threads",
+					"when": "view == vscode-embedded.rtosViewer && vscode-embedded.rtosViewer.activeRtos != 'unknown'"
+				},
+				{
+					"command": "vscode-embedded.rtosViewer.timers",
+					"when": "view == vscode-embedded.rtosViewer && vscode-embedded.rtosViewer.activeRtos == 'threadx'"
+				},
+				{
+					"command": "vscode-embedded.rtosViewer.queues",
+					"when": "view == vscode-embedded.rtosViewer && vscode-embedded.rtosViewer.activeRtos =~ /^threadx$|^freertos$/"
+				},
+				{
+					"command": "vscode-embedded.rtosViewer.semaphores",
+					"when": "view == vscode-embedded.rtosViewer && vscode-embedded.rtosViewer.activeRtos == 'threadx'"
+				},
+				{
+					"command": "vscode-embedded.rtosViewer.mutexes",
+					"when": "view == vscode-embedded.rtosViewer && vscode-embedded.rtosViewer.activeRtos == 'threadx'"
+				},
+				{
+					"command": "vscode-embedded.rtosViewer.eventFlags",
+					"when": "view == vscode-embedded.rtosViewer && vscode-embedded.rtosViewer.activeRtos == 'threadx'"
+				},
+				{
+					"command": "vscode-embedded.rtosViewer.blockPools",
+					"when": "view == vscode-embedded.rtosViewer && vscode-embedded.rtosViewer.activeRtos == 'threadx'"
+				},
+				{
+					"command": "vscode-embedded.rtosViewer.bytePools",
+					"when": "view == vscode-embedded.rtosViewer && vscode-embedded.rtosViewer.activeRtos == 'threadx'"
+				}
+			],
+			"explorer/context": [
+				{
+					"command": "vscode-embedded.openWithStm32CubeMx",
+					"when": "resourceExtname == .ioc",
+					"group": "navigation"
+				}
+			]
+		},
+		"views": {
+			"vscode-embedded-embeddedTools": [
+				{
+					"id": "vscode-embedded.rtosViewer",
+					"name": "%vscode-embedded.rtosViewer.name%",
+					"type": "webview",
+					"when": "inDebugMode && debugType =~ /^cppdbg$|^cspy$|^embedded-debug$|^cortex-debug$/ && vscode-embedded.rtosViewer.activeRtos != 'unknown'"
+				}
+			],
+			"debug": [
+				{
+					"id": "vscode-embedded.webview.registerView",
+					"name": "%vscode-embedded.webview.registerView.name%",
+					"type": "webview",
+					"when": "inDebugMode && debugType =~ /^cppdbg$|^cspy$|^embedded-debug$|^cortex-debug$/"
+				}
+			]
+		},
+		"viewsContainers": {
+			"panel": [
+				{
+					"id": "vscode-embedded-embeddedTools",
+					"title": "%vscode-embedded.contributes.configuration.title%",
+					"icon": ""
+				}
+			]
+		}
+	},
+	"activationEvents": [
+		"onDebugResolve:cspy",
+		"onDebugResolve:cppdbg",
+		"onDebugResolve:embedded-debug",
+		"onDebugResolve:cortex-debug",
+		"onCommand:vscode-embedded.convertStProject",
+		"onCommand:vscode-embedded.st.gdbserver",
+		"onCommand:vscode-embedded.st.cubeprogrammer",
+		"onCommand:vscode-embedded.st.svd",
+		"onCommand:vscode-embedded.st.gdb",
+		"onCommand:vscode-embedded.st.cubemx",
+		"onCommand:vscode-embedded.openWithStm32CubeMx",
+		"workspaceContains:vcpkg-configuration.json"
+	],
+	"dependencies": {
+		"@vscode-embedded-tools/localization": "^0.1.0",
+		"@vscode-embedded-tools/messaging": "^0.1.0",
+		"@vscode-embedded-tools/node-utils": "^0.1.0",
+		"@vscode-embedded-tools/register-webview": "^0.1.0",
+		"@vscode-embedded-tools/rtos": "^0.1.0",
+		"@vscode-embedded-tools/rtos-webview": "^0.1.0",
+		"@vscode-embedded-tools/st-project-converter": "^0.1.0",
+		"@vscode-embedded-tools/svd": "^0.1.0",
+		"@vscode-embedded-tools/telemetry": "^0.1.0",
+		"@vscode-embedded-tools/utils": "^0.1.0",
+		"@vscode-embedded-tools/vscode-host-utils": "^0.1.0"
+	},
+	"devDependencies": {
+		"@types/node": "^16.11.7",
+		"@types/vscode": "^1.55.0",
+		"@vscode-embedded-tools/eslint-config": "^0.1.0",
+		"copy-webpack-plugin": "^10.2.4",
+		"eslint": "^7.32.0",
+		"raw-loader": "~4.0.2",
+		"rimraf": "^3.0.2",
+		"source-map-loader": "~3.0.1",
+		"ts-loader": "^9.2.5",
+		"typescript": "~4.5.5",
+		"vscode-nls-dev": "~3.3.2",
+		"webpack": "^5.54.0",
+		"webpack-cli": "^4.7.0"
+	},
+	"extensionDependencies": [
+		"ms-vscode.cpptools"
+	],
+	"engines": {
+		"vscode": "^1.63.0"
+	},
+	"icon": "assets/icons/EmbeddedTools_128.png",
+	"preview": true,
+	"extensionKind": [
+		"workspace"
+	],
+	"__metadata": {
+		"id": "10d19823-b8c0-4b72-b48d-65a421aed669",
+		"publisherId": "5f5636e7-69ed-4afe-b5d6-8d231fb3d3ee",
+		"publisherDisplayName": "Microsoft",
+		"targetPlatform": "undefined",
+		"isApplicationScoped": false,
+		"updated": true,
+		"isPreReleaseVersion": false,
+		"preRelease": false,
+		"installedTimestamp": 1663396330010
+	}
+}

@@ -1,0 +1,18 @@
+{
+	"vscode-embedded.contributes.configuration.title": "Встроенные инструменты",
+	"vscode-embedded.convertStProject.title": "Создать проект из проекта ST",
+	"vscode-embedded.registerViewer.svd.path.description": "Укажите используемый SVD-файл",
+	"vscode-embedded.loggingVerbosity": "Укажите уровень детализации ведения журнала для встроенных инструментов",
+	"vscode-embedded.webview.registerView.name": "Представление периферийного устройства",
+	"vscode-embedded.rtosViewer.name": "Средство просмотра ОСРВ",
+	"vscode-embedded.webview.refreshRegisterView.title": "Обновить",
+	"vscode-embedded.rtosViewer.threads.title": "Потоки",
+	"vscode-embedded.rtosViewer.timers.title": "Таймеры",
+	"vscode-embedded.rtosViewer.queues.title": "Очереди",
+	"vscode-embedded.rtosViewer.semaphores.title": "Семафоры",
+	"vscode-embedded.rtosViewer.mutexes.title": "Мьютексы",
+	"vscode-embedded.rtosViewer.eventFlags.title": "Флаги событий",
+	"vscode-embedded.rtosViewer.blockPools.title": "Пулы блоков",
+	"vscode-embedded.rtosViewer.bytePools.title": "Байт-пулы",
+	"vscode-embedded.openWithStm32CubeMx.title": "Открыть с помощью STM32CubeMX"
+}

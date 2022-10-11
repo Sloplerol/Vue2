@@ -1,0 +1,18 @@
+{
+	"vscode-embedded.contributes.configuration.title": "Eingebettete Tools",
+	"vscode-embedded.convertStProject.title": "Erstellen eines Projekts aus einem ST-Projekt",
+	"vscode-embedded.registerViewer.svd.path.description": "Zu verwendende SVD-Datei angeben",
+	"vscode-embedded.loggingVerbosity": "Protokollierungsausführlichkeit der eingebetteten Tools angeben",
+	"vscode-embedded.webview.registerView.name": "Peripherieansicht",
+	"vscode-embedded.rtosViewer.name": "RTOS Viewer",
+	"vscode-embedded.webview.refreshRegisterView.title": "Aktualisieren",
+	"vscode-embedded.rtosViewer.threads.title": "Threads",
+	"vscode-embedded.rtosViewer.timers.title": "Zeitgeber",
+	"vscode-embedded.rtosViewer.queues.title": "Warteschlangen",
+	"vscode-embedded.rtosViewer.semaphores.title": "Semaphoren",
+	"vscode-embedded.rtosViewer.mutexes.title": "Mutexe",
+	"vscode-embedded.rtosViewer.eventFlags.title": "Ereigniskennzeichen",
+	"vscode-embedded.rtosViewer.blockPools.title": "Blockpools",
+	"vscode-embedded.rtosViewer.bytePools.title": "Bytepools",
+	"vscode-embedded.openWithStm32CubeMx.title": "Mit STM32CubeMX öffnen"
+}

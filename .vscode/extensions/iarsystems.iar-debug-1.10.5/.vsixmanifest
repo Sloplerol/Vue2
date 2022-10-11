@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+		<Metadata>
+			<Identity Language="en-US" Id="iar-debug" Version="1.10.5" Publisher="iarsystems" />
+			<DisplayName>IAR C-SPY Debug</DisplayName>
+			<Description xml:space="preserve">Debug embedded applications using the IAR C-SPY debugger.</Description>
+			<Tags>IAR,C-SPY,debuggers,ARM,Embedded,IoT,c,c++,cpp,i-jet,j-link,jlink,multi-root ready</Tags>
+			<Categories>Debuggers</Categories>
+			<GalleryFlags>Public</GalleryFlags>
+			
+			<Properties>
+				<Property Id="Microsoft.VisualStudio.Code.Engine" Value="^1.64.0" />
+				<Property Id="Microsoft.VisualStudio.Code.ExtensionDependencies" Value="ms-vscode.vscode-embedded-tools" />
+				<Property Id="Microsoft.VisualStudio.Code.ExtensionPack" Value="" />
+				<Property Id="Microsoft.VisualStudio.Code.ExtensionKind" Value="workspace" />
+				<Property Id="Microsoft.VisualStudio.Code.LocalizedLanguages" Value="" />
+				
+				
+				<Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/IARSystems/iar-vsc-debug.git" />
+				<Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/IARSystems/iar-vsc-debug.git" />
+				<Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/IARSystems/iar-vsc-debug.git" />
+				<Property Id="Microsoft.VisualStudio.Services.Links.Support" Value="https://github.com/IARSystems/iar-vsc-debug/issues" />
+				<Property Id="Microsoft.VisualStudio.Services.Links.Learn" Value="https://www.iar.com/" />
+				<Property Id="Microsoft.VisualStudio.Services.Branding.Color" Value="#ffe000" />
+				<Property Id="Microsoft.VisualStudio.Services.Branding.Theme" Value="light" />
+				<Property Id="Microsoft.VisualStudio.Services.GitHubFlavoredMarkdown" Value="true" />
+				
+				<Property Id="Microsoft.VisualStudio.Services.CustomerQnALink" Value="https://www.iar.com/support/" />
+			</Properties>
+			
+			<Icon>extension/images/logo.png</Icon>
+		</Metadata>
+		<Installation>
+			<InstallationTarget Id="Microsoft.VisualStudio.Code"/>
+		</Installation>
+		<Dependencies/>
+		<Assets>
+			<Asset Type="Microsoft.VisualStudio.Code.Manifest" Path="extension/package.json" Addressable="true" />
+			<Asset Type="Microsoft.VisualStudio.Services.Content.Details" Path="extension/README.md" Addressable="true" />
+<Asset Type="Microsoft.VisualStudio.Services.Content.Changelog" Path="extension/CHANGELOG.md" Addressable="true" />
+<Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/images/logo.png" Addressable="true" />
+		</Assets>
+	</PackageManifest>

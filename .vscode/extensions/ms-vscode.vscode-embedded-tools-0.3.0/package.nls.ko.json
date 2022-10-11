@@ -1,0 +1,18 @@
+{
+	"vscode-embedded.contributes.configuration.title": "포함된 도구",
+	"vscode-embedded.convertStProject.title": "ST 프로젝트에서 프로젝트 만들기",
+	"vscode-embedded.registerViewer.svd.path.description": "사용할 SVD 파일 지정",
+	"vscode-embedded.loggingVerbosity": "포함된 도구의 로깅 세부 정보 표시 지정",
+	"vscode-embedded.webview.registerView.name": "주변 장치 보기",
+	"vscode-embedded.rtosViewer.name": "RTOS 뷰어",
+	"vscode-embedded.webview.refreshRegisterView.title": "새로 고침",
+	"vscode-embedded.rtosViewer.threads.title": "스레드",
+	"vscode-embedded.rtosViewer.timers.title": "타이머",
+	"vscode-embedded.rtosViewer.queues.title": "큐",
+	"vscode-embedded.rtosViewer.semaphores.title": "세마포어",
+	"vscode-embedded.rtosViewer.mutexes.title": "뮤텍스",
+	"vscode-embedded.rtosViewer.eventFlags.title": "이벤트 플래그",
+	"vscode-embedded.rtosViewer.blockPools.title": "블록 풀",
+	"vscode-embedded.rtosViewer.bytePools.title": "바이트 풀",
+	"vscode-embedded.openWithStm32CubeMx.title": "STM32CubeMX로 열기"
+}

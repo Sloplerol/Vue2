@@ -1,0 +1,606 @@
+{
+	"name": "iar-debug",
+	"displayName": "IAR C-SPY Debug",
+	"version": "1.10.5",
+	"publisher": "iarsystems",
+	"icon": "images/logo.png",
+	"galleryBanner": {
+		"color": "#ffe000",
+		"theme": "light"
+	},
+	"description": "Debug embedded applications using the IAR C-SPY debugger.",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/IARSystems/iar-vsc-debug"
+	},
+	"license": "MPL-2.0",
+	"homepage": "https://www.iar.com/",
+	"qna": "https://www.iar.com/support/",
+	"keywords": [
+		"IAR",
+		"C-SPY",
+		"debuggers",
+		"ARM",
+		"Embedded",
+		"IoT",
+		"c",
+		"c++",
+		"cpp",
+		"i-jet",
+		"j-link",
+		"jlink",
+		"multi-root ready"
+	],
+	"engines": {
+		"vscode": "^1.64.0",
+		"node": "^14.4.0"
+	},
+	"categories": [
+		"Debuggers"
+	],
+	"extensionDependencies": [
+		"ms-vscode.vscode-embedded-tools"
+	],
+	"private": true,
+	"dependencies": {
+		"@vscode/debugadapter": "^1.53.0",
+		"@vscode/debugprotocol": "^1.53.0",
+		"async-mutex": "^0.3.2",
+		"await-notify": "1.0.1",
+		"bufferutil": "^4.0.6",
+		"iar-vsc-common": "git+https://gitlab+deploy-token-6:zP_nexJjg1EbkpfD1n3z@gitlab.iar.se/ide/vscode/iar-vsc-common.git#38096c26",
+		"thrift": "^0.12.0",
+		"utf-8-validate": "^5.0.9",
+		"uuid": "^8.3.2",
+		"xmlbuilder2": "^3.0.2"
+	},
+	"devDependencies": {
+		"@types/jsdom": "^16.2.14",
+		"@types/mocha": "^9.1.0",
+		"@types/node": "^14.7.0",
+		"@types/node-int64": "^0.4.29",
+		"@types/thrift": "^0.10.9",
+		"@types/uuid": "^8.3.1",
+		"@types/vscode": "1.64.0",
+		"@typescript-eslint/eslint-plugin": "^5.2.0",
+		"@typescript-eslint/parser": "^5.2.0",
+		"@vscode/debugadapter-testsupport": "^1.51.0",
+		"eslint": "^8.1.0",
+		"eslint-plugin-deprecation": "^1.3.2",
+		"husky": "^7.0.4",
+		"jsdom": "^19.0.0",
+		"mocha": "^9.1.0",
+		"ts-loader": "^9.2.6",
+		"typescript": "^4.3.0",
+		"vsce": "^2.6.4",
+		"webpack": "^5.68.0",
+		"webpack-cli": "^4.9.2"
+	},
+	"scripts": {
+		"lint": "eslint . --ext .ts",
+		"vscode:prepublish": "npm run package",
+		"webpack": "webpack --mode development",
+		"webpack-watch": "webpack --mode development --watch",
+		"package": "webpack --mode production --devtool hidden-source-map",
+		"test-compile": "npm run webpack && tsc -p ./",
+		"prepare": "husky install"
+	},
+	"main": "./dist/extension",
+	"activationEvents": [
+		"onDebugResolve:cspy",
+		"onDebugDynamicConfigurations:cspy",
+		"onDebugInitialConfigurations",
+		"onCommand:iar.useAutoBreakpoints",
+		"onCommand:iar.useHardwareBreakpoints",
+		"onCommand:iar.useSoftwareBreakpoints"
+	],
+	"contributes": {
+		"configuration": {
+			"title": "IAR C-SPY Debug",
+			"properties": {
+				"iar-debug.breakpointType": {
+					"default": "Auto",
+					"description": "Whether to set hardware- or software breakpoints. This only affects drivers that support it. Changing this setting will not affect already installed breakpoints in active sessions.",
+					"type": "string",
+					"enum": [
+						"Auto",
+						"Hardware",
+						"Software"
+					],
+					"enumDescriptions": [
+						"Use the driver's default breakpoint type.",
+						"Use hardware breakpoints.",
+						"Use software breakpoints."
+					]
+				}
+			}
+		},
+		"menus": {},
+		"commands": [
+			{
+				"command": "iar.useAutoBreakpoints",
+				"category": "IAR Debug",
+				"title": "Set Breakpoint Type: Auto"
+			},
+			{
+				"command": "iar.useHardwareBreakpoints",
+				"category": "IAR Debug",
+				"title": "Set Breakpoint Type: Hardware"
+			},
+			{
+				"command": "iar.useSoftwareBreakpoints",
+				"category": "IAR Debug",
+				"title": "Set Breakpoint Type: Software"
+			},
+			{
+				"command": "iar.useAutoBreakpointsActive",
+				"category": "IAR Debug",
+				"title": "Set Breakpoint Type: Auto (Current Session Only)",
+				"enablement": "debugType == cspy && !iar-debug.noAutoBreakpoints"
+			},
+			{
+				"command": "iar.useHardwareBreakpointsActive",
+				"category": "IAR Debug",
+				"title": "Set Breakpoint Type: Hardware (Current Session Only)",
+				"enablement": "debugType == cspy && !iar-debug.noHardwareBreakpoints"
+			},
+			{
+				"command": "iar.useSoftwareBreakpointsActive",
+				"category": "IAR Debug",
+				"title": "Set Breakpoint Type: Software (Current Session Only)",
+				"enablement": "debugType == cspy && !iar-debug.noSoftwareBreakpoints"
+			}
+		],
+		"breakpoints": [
+			{
+				"language": "c"
+			},
+			{
+				"language": "cpp"
+			}
+		],
+		"debuggers": [
+			{
+				"type": "cspy",
+				"label": "IAR C-SPY Debug",
+				"program": "./out/dap/cspyDebug.js",
+				"runtime": "node",
+				"languages": [
+					"c",
+					"cpp"
+				],
+				"configurationAttributes": {
+					"launch": {
+						"required": [
+							"target",
+							"program",
+							"workbenchPath",
+							"driver",
+							"driverOptions"
+						],
+						"properties": {
+							"target": {
+								"type": "string",
+								"description": "The target type, e.g 'arm', in lower case.",
+								"default": "arm"
+							},
+							"program": {
+								"type": "string",
+								"description": "Absolute path to a .out file to debug.",
+								"default": "${workspaceFolder}/Debug/Exe/ewproj.out"
+							},
+							"stopOnEntry": {
+								"type": "boolean",
+								"description": "Automatically stop after launch.",
+								"default": true
+							},
+							"trace": {
+								"type": "boolean",
+								"description": "Log all Debug Adapter Protocol traffic.",
+								"default": true
+							},
+							"workbenchPath": {
+								"type": "string",
+								"description": "Path to the IAR Embedded Workbench installation to use (e.g. \"C:\\\\Program Files (x86)\\\\IAR Systems\\\\Embedded Workbench 8.3\").",
+								"default": "${command:iar-config.toolchain} for an iar-build project or path to EW root."
+							},
+							"projectPath": {
+								"type": "string",
+								"description": "Path to a .ewp file, or a folder in which to place debug settings files.",
+								"default": "${command:iar-config.project-file} for an iar-build project."
+							},
+							"projectConfiguration": {
+								"type": "string",
+								"description": "Name of the project configuration to debug (e.g. Debug). Only applicable to .ewp projects",
+								"default": "${command:iar-config.project-configuration} for an iar-build project. Remove this for other project types."
+							},
+							"driver": {
+								"type": "string",
+								"description": "The driver to use.",
+								"default": "Simulator",
+								"enum": [
+									"Simulator",
+									"64-bit Simulator",
+									"I-jet",
+									"J-Link/J-Trace",
+									"GDB Server",
+									"CADI",
+									"TI Stellaris",
+									"PE micro",
+									"ST-LINK",
+									"TI XDS",
+									"TI MSP-FET",
+									"Renesas E1",
+									"Renesas E2",
+									"Renesas E20"
+								],
+								"enumDescriptions": [
+									"Arm/RISC-V/RH850",
+									"Arm",
+									"Arm/RISC-V",
+									"Arm/RISC-V",
+									"Arm/RISC-V",
+									"Arm",
+									"Arm",
+									"Arm",
+									"Arm",
+									"Arm",
+									"Arm",
+									"RH850",
+									"RH850",
+									"RH850"
+								]
+							},
+							"driverOptions": {
+								"type": "array",
+								"description": "The command line to use when launching the debugger. For reference, see \"Summary of C-SPY command line options\" in the C-SPY Debugging Guide: https://wwwfiles.iar.com/arm/webic/doc/EWARM_DebuggingGuide.ENU.pdf",
+								"items": {
+									"type": "string"
+								},
+								"default": [
+									"--endian=little",
+									"--cpu=<CPU_NAME>",
+									"--fpu=None",
+									"--semihosting"
+								]
+							},
+							"download": {
+								"type": "object",
+								"description": "Options for downloading to hardware. Can be omitted.",
+								"properties": {
+									"flashLoader": {
+										"type": "string",
+										"description": "A flash loader specification XML file, with the filename extension '.board'.",
+										"format": "uri"
+									},
+									"deviceMacros": {
+										"type": "array",
+										"description": "A list of device macros to load when running the flash loader.",
+										"items": {
+											"type": "string",
+											"format": "uri"
+										}
+									}
+								}
+							},
+							"plugins": {
+								"type": "array",
+								"description": "The set of plugins to be loaded during the debug session.",
+								"items": {
+									"type": "string",
+									"format": "uri"
+								},
+								"default": []
+							},
+							"setupMacros": {
+								"type": "array",
+								"description": "A list of macros to be loaded with the debug session.",
+								"items": {
+									"type": "string",
+									"format": "uri"
+								},
+								"default": []
+							},
+							"sourceFileMap": {
+								"type": "object",
+								"description": "A set of path mappings to use when resolving nonexistent source files. If the source files have been moved after compiling, this can be used to locate them. Example: `{\"/original/path\": \"/new/path\"}`",
+								"default": {
+									"<source-path>": "<target-path>"
+								}
+							}
+						}
+					}
+				},
+				"initialConfigurations": [],
+				"configurationSnippets": [
+					{
+						"label": "C-SPY: Debug .ewp project",
+						"description": "A new configuration for debugging a program with C-SPY that is using the iar-build extension.",
+						"body": {
+							"type": "cspy",
+							"request": "launch",
+							"name": "${1:Debug with C-SPY}",
+							"target": "arm",
+							"program": "^\"\\${workspaceFolder}/\\${command:iar-config.project-configuration}/Exe/${2:ewproj.out}\"",
+							"stopOnEntry": true,
+							"workbenchPath": "^\"\\${command:iar-config.toolchain}\"",
+							"projectPath": "^\"\\${command:iar-config.project-file}\"",
+							"projectConfiguration": "^\"\\${command:iar-config.project-configuration}\"",
+							"driver": "Simulator",
+							"driverOptions": [
+								"--endian=little",
+								"--cpu=${3:Cortex-M4}",
+								"--fpu=None",
+								"--semihosting"
+							],
+							"download": {
+								"flashLoader": "",
+								"deviceMacros": []
+							}
+						}
+					},
+					{
+						"label": "C-SPY: Generic launch configuration",
+						"description": "A new configuration for debugging a program with C-SPY.",
+						"body": {
+							"type": "cspy",
+							"request": "launch",
+							"name": "${1:Debug with C-SPY}",
+							"target": "arm",
+							"program": "^\"\\${workspaceFolder}/Debug/Exe/${2:ewproj.out}\"",
+							"stopOnEntry": true,
+							"workbenchPath": "${3:workbenchPath}",
+							"driver": "Simulator",
+							"driverOptions": [
+								"--endian=little",
+								"--cpu=${4:Cortex-M4}",
+								"--fpu=None",
+								"--semihosting"
+							],
+							"download": {
+								"flashLoader": "",
+								"deviceMacros": []
+							}
+						}
+					},
+					{
+						"label": "C-SPY Arm: I-Jet launch configuration",
+						"description": "A new configuration for debugging an .ewp project with an I-Jet probe.",
+						"body": {
+							"type": "cspy",
+							"request": "launch",
+							"name": "${1:Debug with C-SPY I-Jet}",
+							"target": "arm",
+							"program": "${workspaceFolder}/Debug/Exe/${2:ewproj.out}",
+							"stopOnEntry": true,
+							"workbenchPath": "^\"\\${command:iar-config.toolchain}\"",
+							"projectPath": "^\"\\${command:iar-config.project-file}\"",
+							"projectConfiguration": "^\"\\${command:iar-config.project-configuration}\"",
+							"driver": "I-jet",
+							"driverOptions": [
+								"--endian=little",
+								"--cpu=${3:Cortex-M4}",
+								"--fpu=${4:VFPv4_SP}",
+								"-p",
+								"^\"\\${command:iar-config.toolchain}/arm/CONFIG/debugger/${5:ST/STM32F429II.ddf}\"",
+								"--device=${6:STM32F429II}",
+								"--semihosting",
+								"--jet_standard_reset=4,0,0",
+								"--reset_style=\"0,-,0,Disabled (no reset)\"",
+								"--reset_style=\"1,-,0,Software\"",
+								"--reset_style=\"2,-,0,Hardware\"",
+								"--reset_style=\"3,-,0,Core\"",
+								"--reset_style=\"4,-,1,System\"",
+								"--reset_style=\"9,ConnectUnderReset,0,Connect during reset\"",
+								"--jet_power_from_probe=leave_on",
+								"--drv_interface=SWD",
+								"--jet_cpu_clock=180000000",
+								"--drv_catch_exceptions=0xff0"
+							],
+							"download": {
+								"flashLoader": "^\"\\${command:iar-config.toolchain}/arm/config/flashloader/${7:ST/FlashSTM32F427xI.board}\"",
+								"deviceMacros": [
+									"^\"\\${command:iar-config.toolchain}/arm/CONFIG/debugger/${8:ST/STM32F4xx.dmac}\""
+								]
+							}
+						}
+					},
+					{
+						"label": "C-SPY Arm: J-Link launch configuration",
+						"description": "A new configuration for debugging an .ewp project with a J-Link probe.",
+						"body": {
+							"type": "cspy",
+							"request": "launch",
+							"name": "${1:Debug with C-SPY J-Link}",
+							"target": "arm",
+							"program": "${workspaceFolder}/Debug/Exe/${2:ewproj.out}",
+							"stopOnEntry": true,
+							"workbenchPath": "^\"\\${command:iar-config.toolchain}\"",
+							"projectPath": "^\"\\${command:iar-config.project-file}\"",
+							"projectConfiguration": "^\"\\${command:iar-config.project-configuration}\"",
+							"driver": "J-Link",
+							"driverOptions": [
+								"--endian=little",
+								"--cpu=${3:Cortex-M4}",
+								"--fpu=${4:VFPv4_SP}",
+								"-p",
+								"^\"\\${command:iar-config.toolchain}/arm/CONFIG/debugger/${5:ST/STM32F429II.ddf}\"",
+								"--device=${6:STM32F429II}",
+								"--semihosting",
+								"--drv_communication=USB0",
+								"--drv_interface_speed=auto",
+								"--jlink_initial_speed=1000",
+								"--jlink_reset_strategy=0,0",
+								"--drv_interface=SWD",
+								"--drv_catch_exceptions=0x000",
+								"--drv_swo_clock_setup=180000000,0,2000000"
+							],
+							"download": {
+								"flashLoader": "^\"\\${command:iar-config.toolchain}/arm/config/flashloader/${7:ST/FlashSTM32F427xI.board}\"",
+								"deviceMacros": [
+									"^\"\\${command:iar-config.toolchain}/arm/CONFIG/debugger/${8:ST/STM32F4xx.dmac}\""
+								]
+							}
+						}
+					},
+					{
+						"label": "C-SPY Arm: TI MSP-FET launch configuration",
+						"description": "A new configuration for debugging an .ewp project with a TI MSP-FET probe.",
+						"body": {
+							"type": "cspy",
+							"request": "launch",
+							"name": "${1:Debug with C-SPY TI MSP-FET}",
+							"target": "arm",
+							"program": "${workspaceFolder}/Debug/Exe/${2:ewproj.out}",
+							"stopOnEntry": true,
+							"workbenchPath": "^\"\\${command:iar-config.toolchain}\"",
+							"projectPath": "^\"\\${command:iar-config.project-file}\"",
+							"projectConfiguration": "^\"\\${command:iar-config.project-configuration}\"",
+							"driver": "TI MSP-FET",
+							"driverOptions": [
+								"--endian=little",
+								"--cpu=${3:Cortex-M4}",
+								"--fpu=${4:VFPv4_SP}",
+								"-p",
+								"^\"\\${command:iar-config.toolchain}/arm/CONFIG/debugger/${5:ST/STM32F429II.ddf}\"",
+								"--device=${6:STM32F429II}",
+								"--semihosting",
+								"--mspfet_reset_strategy=0,0",
+								"--drv_interface=AUTO",
+								"--mspfet_vccvoltage=3.0",
+								"--mspfet_settlingtime=0",
+								"--mspfet_interface_speed=medium",
+								"--mspfet_connection=ti_usb",
+								"--mspfet_erase_flash=main_info"
+							],
+							"download": {
+								"deviceMacros": [
+									"^\"\\${command:iar-config.toolchain}/arm/CONFIG/debugger/${8:ST/STM32F4xx.dmac}\""
+								]
+							}
+						}
+					},
+					{
+						"label": "C-SPY RISC-V: Simulator launch configuration",
+						"description": "A new configuration for debugging an .ewp project with the simulator.",
+						"body": {
+							"type": "cspy",
+							"request": "launch",
+							"name": "${1:Debug with C-SPY Simulator}",
+							"target": "riscv",
+							"program": "${workspaceFolder}/Debug/Exe/${2:ewproj.out}",
+							"stopOnEntry": true,
+							"workbenchPath": "^\"\\${command:iar-config.toolchain}\"",
+							"projectPath": "^\"\\${command:iar-config.project-file}\"",
+							"projectConfiguration": "^\"\\${command:iar-config.project-configuration}\"",
+							"driver": "Simulator",
+							"driverOptions": [
+								"--core=${3:RV32IMAFDCN_XANDESDSP_XANDESPERF_Zba_Zbb_Zbc_Zbs}",
+								"-p",
+								"^\"\\${command:iar-config.toolchain}/riscv/config/debugger/${4:ioriscv.ddf}\"",
+								"-d",
+								"sim"
+							]
+						}
+					},
+					{
+						"label": "C-SPY RISC-V: I-Jet launch configuration",
+						"description": "A new configuration for debugging an .ewp project with an I-Jet probe.",
+						"body": {
+							"type": "cspy",
+							"request": "launch",
+							"name": "${1:Debug with C-SPY I-Jet}",
+							"target": "riscv",
+							"program": "${workspaceFolder}/Debug/Exe/${2:ewproj.out}",
+							"stopOnEntry": true,
+							"workbenchPath": "^\"\\${command:iar-config.toolchain}\"",
+							"projectPath": "^\"\\${command:iar-config.project-file}\"",
+							"projectConfiguration": "^\"\\${command:iar-config.project-configuration}\"",
+							"driver": "I-jet",
+							"driverOptions": [
+								"--core=${3:RV32IMAFDCN_XANDESDSP_XANDESPERF_Zba_Zbb_Zbc_Zbs}",
+								"-p",
+								"^\"\\${command:iar-config.toolchain}/riscv/config/debugger/${4:ioriscv.ddf}\"",
+								"--multicore_nr_of_cores=1",
+								"--jet_standard_reset=2,300,200",
+								"--reset_style=\"0,-,0,Disabled (no reset)",
+								"--reset_style=\"1,-,0,Software",
+								"--reset_style=\"2,-,1,Hardware",
+								"--reset_style=\"3,-,0,Core",
+								"--reset_style=\"4,-,0,System",
+								"--drv_catch_exceptions=0x70000000",
+								"--drv_system_bus_access"
+							]
+						}
+					},
+					{
+						"label": "C-SPY RH850: Simulator launch configuration",
+						"description": "A new configuration for debugging an .ewp project with the simulator.",
+						"body": {
+							"type": "cspy",
+							"request": "launch",
+							"name": "${1:Debug with C-SPY Simulator}",
+							"target": "rh850",
+							"program": "${workspaceFolder}/Debug/Exe/${2:ewproj.out}",
+							"stopOnEntry": true,
+							"workbenchPath": "^\"\\${command:iar-config.toolchain}\"",
+							"projectPath": "^\"\\${command:iar-config.project-file}\"",
+							"projectConfiguration": "^\"\\${command:iar-config.project-configuration}\"",
+							"driver": "Simulator",
+							"driverOptions": [
+								"--core",
+								"${3:g3m}",
+								"-p",
+								"^\"\\${command:iar-config.toolchain}/rh850/config/debugger/${4:iorh850_g3m.ddf}\"",
+								"--double=64",
+								"-d",
+								"sim"
+							]
+						}
+					},
+					{
+						"label": "C-SPY RH850: E1/E2/E20 Emulator launch configuration",
+						"description": "A new configuration for debugging an .ewp project on the emulator.",
+						"body": {
+							"type": "cspy",
+							"request": "launch",
+							"name": "${1:Debug with C-SPY Emulator}",
+							"target": "rh850",
+							"program": "${workspaceFolder}/Debug/Exe/${2:ewproj.out}",
+							"stopOnEntry": true,
+							"workbenchPath": "^\"\\${command:iar-config.toolchain}\"",
+							"projectPath": "^\"\\${command:iar-config.project-file}\"",
+							"projectConfiguration": "^\"\\${command:iar-config.project-configuration}\"",
+							"driver": "${3:Renesas E1}",
+							"driverOptions": [
+								"--core",
+								"${4:g3m}",
+								"-p",
+								"^\"\\${command:iar-config.toolchain}/rh850/config/debugger/${5:iorh850_g3m.ddf}\"",
+								"--double=64",
+								"-d",
+								"${6:e1}",
+								"--drv_verify_download",
+								"--LPD1_baud",
+								"0",
+								"--cspybat_inifile",
+								"${workspaceFolder}/settings/${7:MyProjectName}.dnx"
+							]
+						}
+					}
+				]
+			}
+		]
+	},
+	"__metadata": {
+		"id": "c67303cd-9729-48b7-8082-a93017d2f21f",
+		"publisherId": "7bc5e97c-1a66-43b5-9792-ee3840f28fd9",
+		"publisherDisplayName": "IAR Systems",
+		"targetPlatform": "undefined",
+		"isApplicationScoped": false,
+		"updated": true,
+		"isPreReleaseVersion": false,
+		"preRelease": false,
+		"installedTimestamp": 1663396330371
+	}
+}

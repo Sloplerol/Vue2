@@ -1,0 +1,18 @@
+{
+	"vscode-embedded.contributes.configuration.title": "內嵌工具",
+	"vscode-embedded.convertStProject.title": "從 ST 專案建立專案",
+	"vscode-embedded.registerViewer.svd.path.description": "指定要使用的 SVD 檔案",
+	"vscode-embedded.loggingVerbosity": "指定內嵌工具的記錄詳細資料",
+	"vscode-embedded.webview.registerView.name": "周邊設備檢視",
+	"vscode-embedded.rtosViewer.name": "RTOS 檢視器",
+	"vscode-embedded.webview.refreshRegisterView.title": "重新整理",
+	"vscode-embedded.rtosViewer.threads.title": "執行緒",
+	"vscode-embedded.rtosViewer.timers.title": "計時器",
+	"vscode-embedded.rtosViewer.queues.title": "佇列",
+	"vscode-embedded.rtosViewer.semaphores.title": "信號",
+	"vscode-embedded.rtosViewer.mutexes.title": "Mutexes",
+	"vscode-embedded.rtosViewer.eventFlags.title": "事件旗標",
+	"vscode-embedded.rtosViewer.blockPools.title": "區塊集區",
+	"vscode-embedded.rtosViewer.bytePools.title": "位元組集區",
+	"vscode-embedded.openWithStm32CubeMx.title": "使用 STM32CubeMX 開啟"
+}

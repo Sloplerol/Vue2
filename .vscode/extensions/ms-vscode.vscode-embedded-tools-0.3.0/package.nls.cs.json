@@ -1,0 +1,18 @@
+{
+	"vscode-embedded.contributes.configuration.title": "Vložené nástroje",
+	"vscode-embedded.convertStProject.title": "Vytvořit projekt z projektu ST",
+	"vscode-embedded.registerViewer.svd.path.description": "Zadejte soubor SVD, který se má použít.",
+	"vscode-embedded.loggingVerbosity": "Zadejte podrobnosti protokolování vložených nástrojů.",
+	"vscode-embedded.webview.registerView.name": "Periferní zobrazení",
+	"vscode-embedded.rtosViewer.name": "Prohlížeč RTOS",
+	"vscode-embedded.webview.refreshRegisterView.title": "Aktualizovat",
+	"vscode-embedded.rtosViewer.threads.title": "Vlákna",
+	"vscode-embedded.rtosViewer.timers.title": "Časovače",
+	"vscode-embedded.rtosViewer.queues.title": "Fronty",
+	"vscode-embedded.rtosViewer.semaphores.title": "Semafory",
+	"vscode-embedded.rtosViewer.mutexes.title": "Mutexy",
+	"vscode-embedded.rtosViewer.eventFlags.title": "Příznaky události",
+	"vscode-embedded.rtosViewer.blockPools.title": "Blokovat fondy",
+	"vscode-embedded.rtosViewer.bytePools.title": "Bajtové fondy",
+	"vscode-embedded.openWithStm32CubeMx.title": "Otevřít pomocí STM32CubeMX"
+}

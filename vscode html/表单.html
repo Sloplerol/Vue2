@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title> 
+</head>
+<body>
+<form action="" name="form1" method="post">
+    <!-- label for从而实现点击Username填写表单  -->
+    <label for="demo">Username:</label><input type="text" value="请输入姓名" id="demo"><br>
+    password:<input type="password" maxlength="4"><br>
+    <!-- radio实现单选 -->
+    <input type="radio" name="sex" checked="checked">男<input type="radio" name="sex">女<input type="radio" name="sex">啥也不是<br>
+    <!-- checkbox实现多选 -->
+    <input type="checkbox" name="subject" checked="checked">Math<input type="checkbox" name="subject">English<input type="checkbox" name="subject">Chinese<br>
+    <input type="submit" value="点击提交">
+    <input type="reset" value="重置">
+    <!-- button不会发送数据至服务端,后期搭配js使用 -->
+    <input type="button" value="发送验证码"><br>
+    <!-- 文件域:上传文件 -->
+    <input type="file" value="上传文件"><br>
+    <p>省份:<select>
+        <option>辽宁</option>
+        <option>江苏</option>
+        <option selected="selcected">新疆</option>
+        
+    </select><br>
+    <textarea rows="3" cols="10">
+        adskaksd
+    </textarea>
+    
+</form>
+    
+</body>
+</html>

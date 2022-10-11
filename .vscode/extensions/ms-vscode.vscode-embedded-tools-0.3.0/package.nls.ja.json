@@ -1,0 +1,18 @@
+{
+	"vscode-embedded.contributes.configuration.title": "埋め込みツール",
+	"vscode-embedded.convertStProject.title": "ST プロジェクトからプロジェクトを作成",
+	"vscode-embedded.registerViewer.svd.path.description": "使用する SVD ファイルを指定します",
+	"vscode-embedded.loggingVerbosity": "組み込みツールのログの詳細度を指定する",
+	"vscode-embedded.webview.registerView.name": "周辺機器ビュー",
+	"vscode-embedded.rtosViewer.name": "RTOS ビューアー",
+	"vscode-embedded.webview.refreshRegisterView.title": "最新の情報に更新",
+	"vscode-embedded.rtosViewer.threads.title": "スレッド",
+	"vscode-embedded.rtosViewer.timers.title": "タイマー",
+	"vscode-embedded.rtosViewer.queues.title": "キュー",
+	"vscode-embedded.rtosViewer.semaphores.title": "セマフォ",
+	"vscode-embedded.rtosViewer.mutexes.title": "ミューテックス",
+	"vscode-embedded.rtosViewer.eventFlags.title": "イベント フラグ",
+	"vscode-embedded.rtosViewer.blockPools.title": "ブロック プール",
+	"vscode-embedded.rtosViewer.bytePools.title": "バイト プール",
+	"vscode-embedded.openWithStm32CubeMx.title": "STM32CubeMX で開く"
+}

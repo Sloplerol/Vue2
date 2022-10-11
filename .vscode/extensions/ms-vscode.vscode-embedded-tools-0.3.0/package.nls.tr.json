@@ -1,0 +1,18 @@
+{
+	"vscode-embedded.contributes.configuration.title": "Ekli Araçlar",
+	"vscode-embedded.convertStProject.title": "ST projesinden proje oluşturma",
+	"vscode-embedded.registerViewer.svd.path.description": "Kullanılacak SVD dosyasını belirtin",
+	"vscode-embedded.loggingVerbosity": "Katıştırılmış Araçlar'ın günlüğe kaydetme ayrıntı düzeyini belirtin",
+	"vscode-embedded.webview.registerView.name": "Çevre Birimi Görünümü",
+	"vscode-embedded.rtosViewer.name": "RTOS Görüntüleyicisi",
+	"vscode-embedded.webview.refreshRegisterView.title": "Yenile",
+	"vscode-embedded.rtosViewer.threads.title": "İş parçacıkları",
+	"vscode-embedded.rtosViewer.timers.title": "Zamanlayıcılar",
+	"vscode-embedded.rtosViewer.queues.title": "Kuyruklar",
+	"vscode-embedded.rtosViewer.semaphores.title": "Semaforlar",
+	"vscode-embedded.rtosViewer.mutexes.title": "Mutex’ler",
+	"vscode-embedded.rtosViewer.eventFlags.title": "Olay bayrakları",
+	"vscode-embedded.rtosViewer.blockPools.title": "Blok havuzları",
+	"vscode-embedded.rtosViewer.bytePools.title": "Bayt havuzları",
+	"vscode-embedded.openWithStm32CubeMx.title": "STM32CubeMX ile Aç"
+}

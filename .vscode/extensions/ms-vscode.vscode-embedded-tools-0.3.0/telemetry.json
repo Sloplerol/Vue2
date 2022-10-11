@@ -1,0 +1,268 @@
+{
+  "events": {
+    "RegisterViewer/SessionSummary": {
+      "numberOfWrites": {
+        "classification": "SystemMetaData",
+        "purpose": "FeatureInsight",
+        "endPoint": "none"
+      },
+      "totalBytesWritten": {
+        "classification": "SystemMetaData",
+        "purpose": "FeatureInsight",
+        "isMeasurement": true,
+        "endPoint": "none"
+      },
+      "numberOfFetches": {
+        "classification": "SystemMetaData",
+        "purpose": "FeatureInsight",
+        "endPoint": "none"
+      },
+      "totalBytesFetched": {
+        "classification": "SystemMetaData",
+        "purpose": "FeatureInsight",
+        "isMeasurement": true,
+        "endPoint": "none"
+      },
+      "maxWriteLatency": {
+        "classification": "SystemMetaData",
+        "purpose": "PerformanceAndHealth",
+        "endPoint": "none"
+      },
+      "maxFetchLatency": {
+        "classification": "SystemMetaData",
+        "purpose": "PerformanceAndHealth",
+        "isMeasurement": true,
+        "endPoint": "none"
+      },
+      "fetchLatencyHistogram": {
+        "classification": "SystemMetaData",
+        "purpose": "PerformanceAndHealth",
+        "isMeasurement": true,
+        "endPoint": "none"
+      },
+      "writeLatencyHistogram": {
+        "classification": "SystemMetaData",
+        "purpose": "PerformanceAndHealth",
+        "isMeasurement": true,
+        "endPoint": "none"
+      },
+      "bytesWrittenHistogram": {
+        "classification": "SystemMetaData",
+        "purpose": "PerformanceAndHealth",
+        "isMeasurement": true,
+        "endPoint": "none"
+      },
+      "bytesFetchedHistogram": {
+        "classification": "SystemMetaData",
+        "purpose": "PerformanceAndHealth",
+        "isMeasurement": true,
+        "endPoint": "none"
+      }
+    },
+    "RtosViewer/Thread/SessionSummary": {
+      "type": {
+        "classification": "SystemMetaData",
+        "purpose": "FeatureInsight",
+        "endPoint": "none"
+      },
+      "totalNumberOfRefreshes": {
+        "classification": "SystemMetaData",
+        "purpose": "FeatureInsight",
+        "endPoint": "none"
+      },
+      "refreshLatencyHistogram": {
+        "classification": "SystemMetaData",
+        "purpose": "PerformanceAndHealth",
+        "isMeasurement": true,
+        "endPoint": "none"
+      },
+      "numberOfObjectsHistogram": {
+        "classification": "SystemMetaData",
+        "purpose": "PerformanceAndHealth",
+        "isMeasurement": true,
+        "endPoint": "none"
+      }
+    },
+    "RtosViewer/BlockPool/SessionSummary": {
+      "type": {
+        "classification": "SystemMetaData",
+        "purpose": "FeatureInsight",
+        "endPoint": "none"
+      },
+      "totalNumberOfRefreshes": {
+        "classification": "SystemMetaData",
+        "purpose": "FeatureInsight",
+        "endPoint": "none"
+      },
+      "refreshLatencyHistogram": {
+        "classification": "SystemMetaData",
+        "purpose": "PerformanceAndHealth",
+        "isMeasurement": true,
+        "endPoint": "none"
+      },
+      "numberOfObjectsHistogram": {
+        "classification": "SystemMetaData",
+        "purpose": "PerformanceAndHealth",
+        "isMeasurement": true,
+        "endPoint": "none"
+      }
+    },
+    "RtosViewer/BytePool/SessionSummary": {
+      "type": {
+        "classification": "SystemMetaData",
+        "purpose": "FeatureInsight",
+        "endPoint": "none"
+      },
+      "totalNumberOfRefreshes": {
+        "classification": "SystemMetaData",
+        "purpose": "FeatureInsight",
+        "endPoint": "none"
+      },
+      "refreshLatencyHistogram": {
+        "classification": "SystemMetaData",
+        "purpose": "PerformanceAndHealth",
+        "isMeasurement": true,
+        "endPoint": "none"
+      },
+      "numberOfObjectsHistogram": {
+        "classification": "SystemMetaData",
+        "purpose": "PerformanceAndHealth",
+        "isMeasurement": true,
+        "endPoint": "none"
+      }
+    },
+    "RtosViewer/EventFlagGroup/SessionSummary": {
+      "type": {
+        "classification": "SystemMetaData",
+        "purpose": "FeatureInsight",
+        "endPoint": "none"
+      },
+      "totalNumberOfRefreshes": {
+        "classification": "SystemMetaData",
+        "purpose": "FeatureInsight",
+        "endPoint": "none"
+      },
+      "refreshLatencyHistogram": {
+        "classification": "SystemMetaData",
+        "purpose": "PerformanceAndHealth",
+        "isMeasurement": true,
+        "endPoint": "none"
+      },
+      "numberOfObjectsHistogram": {
+        "classification": "SystemMetaData",
+        "purpose": "PerformanceAndHealth",
+        "isMeasurement": true,
+        "endPoint": "none"
+      }
+    },
+    "RtosViewer/Mutex/SessionSummary": {
+      "type": {
+        "classification": "SystemMetaData",
+        "purpose": "FeatureInsight",
+        "endPoint": "none"
+      },
+      "totalNumberOfRefreshes": {
+        "classification": "SystemMetaData",
+        "purpose": "FeatureInsight",
+        "endPoint": "none"
+      },
+      "refreshLatencyHistogram": {
+        "classification": "SystemMetaData",
+        "purpose": "PerformanceAndHealth",
+        "isMeasurement": true,
+        "endPoint": "none"
+      },
+      "numberOfObjectsHistogram": {
+        "classification": "SystemMetaData",
+        "purpose": "PerformanceAndHealth",
+        "isMeasurement": true,
+        "endPoint": "none"
+      }
+    },
+    "RtosViewer/Queue/SessionSummary": {
+      "type": {
+        "classification": "SystemMetaData",
+        "purpose": "FeatureInsight",
+        "endPoint": "none"
+      },
+      "totalNumberOfRefreshes": {
+        "classification": "SystemMetaData",
+        "purpose": "FeatureInsight",
+        "endPoint": "none"
+      },
+      "refreshLatencyHistogram": {
+        "classification": "SystemMetaData",
+        "purpose": "PerformanceAndHealth",
+        "isMeasurement": true,
+        "endPoint": "none"
+      },
+      "numberOfObjectsHistogram": {
+        "classification": "SystemMetaData",
+        "purpose": "PerformanceAndHealth",
+        "isMeasurement": true,
+        "endPoint": "none"
+      }
+    },
+    "RtosViewer/Semaphore/SessionSummary": {
+      "type": {
+        "classification": "SystemMetaData",
+        "purpose": "FeatureInsight",
+        "endPoint": "none"
+      },
+      "totalNumberOfRefreshes": {
+        "classification": "SystemMetaData",
+        "purpose": "FeatureInsight",
+        "endPoint": "none"
+      },
+      "refreshLatencyHistogram": {
+        "classification": "SystemMetaData",
+        "purpose": "PerformanceAndHealth",
+        "isMeasurement": true,
+        "endPoint": "none"
+      },
+      "numberOfObjectsHistogram": {
+        "classification": "SystemMetaData",
+        "purpose": "PerformanceAndHealth",
+        "isMeasurement": true,
+        "endPoint": "none"
+      }
+    },
+    "RtosViewer/Timer/SessionSummary": {
+      "type": {
+        "classification": "SystemMetaData",
+        "purpose": "FeatureInsight",
+        "endPoint": "none"
+      },
+      "totalNumberOfRefreshes": {
+        "classification": "SystemMetaData",
+        "purpose": "FeatureInsight",
+        "endPoint": "none"
+      },
+      "refreshLatencyHistogram": {
+        "classification": "SystemMetaData",
+        "purpose": "PerformanceAndHealth",
+        "isMeasurement": true,
+        "endPoint": "none"
+      },
+      "numberOfObjectsHistogram": {
+        "classification": "SystemMetaData",
+        "purpose": "PerformanceAndHealth",
+        "isMeasurement": true,
+        "endPoint": "none"
+      }
+    },
+    "Error": {
+      "errorType": {
+        "classification": "SystemMetaData",
+        "purpose": "PerformanceAndHealth",
+        "endPoint": "none"
+      },
+      "errorDetails": {
+        "classification": "SystemMetaData",
+        "purpose": "PerformanceAndHealth",
+        "endPoint": "none"
+      }
+    }
+  },
+  "commonProperties": {}
+}
