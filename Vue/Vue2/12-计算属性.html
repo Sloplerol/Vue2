@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        Firstname:<input type="text" v-model="firstname">
+        lastname:<input type="text" v-model="lastname">
+        FullName: {{fullName}};
+        FullName: {{fullName}};
+        FullName: {{fullName}};
+        FullName: {{fullName}};
+        <!-- 四次调用实际上就调用一次 因为有缓存 -->
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                firstname: 'z',
+                lastname: 'jj'
+            },
+            computed: {
+                fullName: {
+                    get(){
+                        // get this指向为vm
+                        // 初次读取fullName 所依赖的数据发生变化时 调用get
+                        console.log('被读取到了');
+                        return this.firstname+'-'+this.lastname;
+                    },set(value){
+                        const arr = value.split('-');
+                        this.firstname = arr[0];
+                        this.lastname = arr[1];
+                    }
+                    // 只考虑读取不考虑修改可采取简写形式
+                }
+                
+            }
+        })
+    </script>
+</body>
+</html>

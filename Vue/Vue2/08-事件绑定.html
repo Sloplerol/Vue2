@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>欢迎来学习{{name}}</h1>
+        <!-- <button v-on:click="fn">点击触发</button> -->
+        <button @click="fn($event,66)">点击触发</button> 
+        <!-- 通过$event方法去保留event事件 -->
+        <button @click="fn1">点击触发</button>  
+
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                name: 'Vue'
+            },
+            // method管理的是方法data是管理数据的 给方法配置getter和setter是没有意义的
+            // method里不要用箭头函数this指向为window
+            methods: {
+                fn1(event){
+                    console.log(event);
+                    //event是鼠标触发事件一旦传递参数就会遗失event属性
+                },
+                fn(event,number){
+                    console.log(event,number);
+                    alert('nihaoa');
+                }
+            }
+        })
+    </script>
+</body>
+</html>

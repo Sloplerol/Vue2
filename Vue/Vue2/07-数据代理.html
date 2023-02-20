@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>你真是个大帅哥</h1>
+    </div>
+    <script>
+        // 数据代理的概念 通过一个对象代理来操纵另一个对象的属性操作
+        // let obj1 = {name:'zjj'};
+        // let obj2 = {age: 20};
+        // Object.defineProperty(obj2,'name',{
+        //     get(){
+        //         return obj1.name;
+        //     },
+        //     set(value){
+        //         obj1.name = value
+        //     }
+        // })
+        // Vue里的数据代理
+        let data = {
+                name: 'zjj',
+                age: 20
+            };
+        const vm = new Vue({
+            el: '#root',
+            data
+        })
+        // vm里添加data数据属性名后通过自动配备的getter和setter来读取_data里的name和age值
+        // 本质上data里的数据还是存在了_data之中
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <ul>
+            <button @click="cdata">点击修改zjj的数据</button>
+            <li v-for="(p,index) of person">
+                {{p.name}}--{{p.age}}
+            </li>
+        </ul>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                person: [
+                    {id: 001,name: 'zjj',age: 38},
+                    {id: 002,name: 'lhm',age: 28},
+                    {id: 003,name: 'ljm',age: 48},
+
+                ]
+            },
+            methods: {
+                cdata(){
+                    // this.person[0] = {id: 001,name: 'jjb',age: 18}; //Vue监视不到数组要想监视需要调用七种对数组操作的方法
+                    this.person.splice(0,1,{id: 001,name: 'jjb',age: 18});
+                }
+            },
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let obj = {
+            name: 'zjj',
+            age: 20,
+            a: {
+                b: 20
+            }
+            //当obj对象里再套一层对象针对于该模拟是不会为里面的b独自分配getter和setter
+            // 而Vue是可以的
+        }
+        const obs = new Handle(obj);
+        let vm = {};
+        vm._data = obj = obs
+        function Handle(obj){
+            //将所有属性以数组的形式进行打包
+            const keys = Object.keys(obj);
+            keys.forEach((k)=>{
+                Object.defineProperty(this,k,{
+                    get(){
+                        return obj[k];
+                    },
+                    set(val){
+                        console.log('Vue重新解析 创建虚拟DOM 算法比对 最终更新数据');
+                        obj[k] = val;
+                    }
+                })
+            })
+        }
+        
+    </script>
+</body>
+</html>

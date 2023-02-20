@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <!-- 编写组件标签 -->
+        <xuexiao></xuexiao>
+        <hr>
+        <xuesheng></xuesheng>
+        <!-- 只需要再写一个组件标签就可以复用结构 -->
+        <xuesheng></xuesheng>
+        <hello></hello>
+    </div>
+
+    <script>
+        //创建school组件
+        const school = Vue.extend({
+            // el: '#root', //组件一定不要写服务容器
+            template: `
+            <div>
+                我的学校名{{name}}
+                我的学校地址{{address}}
+                <button @click="schName">点击显示学校名称</button>
+            </div>
+            `,
+            // 创建组件时data数据应用函数式 每个开发者对组件的修改不会影响别人里的值
+            data() {
+                return {
+                    name: 'neuosoft',
+                    address: 'hell'
+                }
+            },
+            methods: {
+                schName() {
+                    alert(this.name);
+                }
+            },
+        })
+        // 创建student组件
+        const student = Vue.extend({
+            // el: '#root', //组件一定不要写服务容器
+            template: `
+            <div>
+                我的名{{name}}
+                我的年龄{{age}}
+            </div>
+            `,
+            data() {
+                return {
+                    age: 19,
+                    name: 'zjj'
+                }
+            }
+        })
+        //创建全局组件
+        const hello = Vue.extend({
+            template: `
+            <div>
+                <h1>Hello world{{name}}</h1>
+            </div>
+            `,
+            data(){
+                return {
+                    name: 'wodefa'
+                }
+            }
+        })
+        // 注册全局组件
+        Vue.component('hello',hello);
+        new Vue({
+            el: '#root',
+            //注册组件
+            components: {
+                xuexiao: school,
+                xuesheng: student
+            }
+        })
+        // let data = {
+        //     a: 1,
+        //     b: 2
+        // }
+        // 一个改变则全部改变
+        // let x = data;
+        // let y = data;
+        // 而函数式的每一次都返回一个全新的结果
+        // function data(){
+        //     return {
+        //         a: 1,
+        //         b: 2
+        //     }
+        // }
+        // let x = data();
+        // let y = data();
+    </script>
+</body>
+
+</html>

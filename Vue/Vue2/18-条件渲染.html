@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- v-show里面是一个js表达式 -->
+        <div v-show="a">欢迎来到{{name}}</div>
+
+        <!-- v-if如果为false那么这个元素标签彻底消失 -->
+        <div v-if="false"><h1>你好啊{{name}}</h1></div>
+
+        <div>
+            现在n的值为{{n}}<br>
+            <button @click="n++">点击n++</button>
+            <!-- <div v-show="n===1">Agular</div>
+            <div v-show="n===2">React</div>
+            <div v-show="n===3">Vue</div> -->
+            <!-- v-if elseif else是不可以打断的 -->
+            <!-- <div v-if="n===1">Augular</div>
+            <div v-else-if="n===1">React</div>
+            v-else-if只要看到满足条件的结果就不会往后再看
+            <div v-else-if="n===2">Vue</div>
+            <div v-else>别的都是我</div> -->
+            
+            <!-- template不会影响结构 必须要和v-if进行配合 -->
+            <template v-if="n===1">
+                <h1>你</h1>
+                <p>真</p>
+                <h2>的厉害</h2>
+            </template>
+        </div>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                name: '得来联盟',
+                a: false,
+                n: 0
+            },
+            
+        })
+    </script>
+</body>
+</html>

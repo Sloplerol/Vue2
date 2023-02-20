@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <school></school>
+        <hello></hello>
+        <!-- 在我们通过组件标签调用函数的时候就是new一个构造函数 -->
+    </div>
+    <script>
+        // 每一个组件都是一个Vuecomponent实例对象
+        const school = Vue.extend({
+            template: `
+            <div>
+                <h1>学校的姓名叫{{name}}</h1>
+                <h1>学校的地址{{address}}</h1>
+                <button @click="checkName">点击查看学校姓名</button>
+            </div>
+            `,
+            data(){
+                return {
+                    name: 'zhicheng',
+                    address: 'dalian'
+                }
+            },
+            methods: {
+                checkName(){
+                    alert(this.name);
+                    console.log(this); //this指向为Vuecomponent实例对象
+                }
+            },
+
+            // 组件里的this对象为VC实例化对象
+        })
+        console.log(school);
+        const hello = Vue.extend({
+            template: `
+            <div>
+                <h4>欢迎学习Vue</h4>
+            </div>
+            `
+            
+        })
+        console.log(hello);
+        // 每一次调用Vue.extend生成的构造函数都是新生成的 外表上一样 但实际不同
+        console.log(school===hello);
+        const vm = new Vue({
+            el: '#root',
+            components: {
+                school,
+                hello
+            }
+        })
+        // vm的子组件包含school和hello两个VC组件 通过$children查看
+    </script>
+</body>
+</html>

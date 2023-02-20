@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    LocalStoage
+    <button onclick="store()">点击进行本地存储</button>
+    <button onclick="get()">点击读取</button>
+    <button onclick="deleteRes()">点击删除</button>
+    <button onclick="clearData()">清空数据< /button>
+</body>
+<script>
+    let p = {name:'zjj',age: 10}
+    //将p进行本地存储相当于对对象调用toString方法 得到结果为[Object,Object]
+    function store(){
+        //本地存储存的都是字符串
+        // localStorage.setItem('ms g','hello world');
+        // JSON将对象转化为字符串呈现的时候能看到对象里面的内容
+        localStorage.setItem('person',JSON.stringify(p));
+        
+    }
+    function get(){
+        //本地存储读取不到数据返回结果为null
+        console.log(JSON.parse(localStorage.getItem('person')));
+    }
+    function deleteRes(){
+        localStorage.removeItem('person');
+    }
+    function clearData(){
+        localStorage.clear();
+    }
+</script>
+</html>

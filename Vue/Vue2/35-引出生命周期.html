@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h1 :style={opacity}>欢迎学习Vue</h1>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                opacity: 1
+            },
+            // mounted函数只会在初始的真实DOM挂载到页面上的时候才会调用
+            mounted() {
+                //在调用mounted函数的时候this指向为vm
+                console.log('mounted',this);
+                setInterval(()=>{
+                    this.opacity -= 0.01;
+                    if (this.opacity <= 0) this.opacity = 1
+                }, 16)
+            },
+        })
+        // setInterval(function(){
+        //     vm.opacity-=0.01;
+        //     if(vm.opacity<=0) vm.opacity=1
+        // },16)
+    </script>
+</body>
+
+</html>

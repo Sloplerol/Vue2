@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- 系统特殊键需要keydown事件的 ctrl alt shift meta(win) -->
+        <!-- 当触发tab事件的时候需要修改成keydown因为他会在按下的时候就移除光标 -->
+        <input type="text" @keydown.tab="handle">
+        <!-- 相当于输入值后必须要按下enter键才能返回值 -->
+        <!-- 如果想按下组合键触发事件 -->
+        <input type="text" @keyup.ctrl.y = 'handle'>;
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                name: 'zjj'
+            },
+            methods: {
+                handle(e){
+                    console.log(e.target.value);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

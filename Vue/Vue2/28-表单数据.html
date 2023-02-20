@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <form>
+            <label for="user">用户:</label>
+            <!-- .trim不收集前面的空格 -->
+            <input type="text" id="user" v-model.trim="userinfo.user"><br><br>
+            <label for="pwd">密码:</label>
+            <input type="text" id="pwd" v-model="userinfo.pwd"><br><br>
+            <label for="age">年龄</label>
+            <!-- .number在Vue获得的是一个数字 一般同时使用 当类型为text输入字母后面的就不会去获取了 -->
+            <input type="number" id="age" v-model.number="userinfo.age"><br><br>
+            单选: 男<input type="radio" name="danxuan" value="male" v-model="userinfo.sex"> 女<input type="radio" name="danxuan" value="female" v-model="userinfo.sex"><br><br>
+            爱好: 抽烟<input type="checkbox" v-model="userinfo.hobby" value="chouyan"> 喝酒<input type="checkbox"v-model="userinfo.hobby" value="hejiu" > 打麻将<input type="checkbox" v-model="userinfo.hobby" value="damajiang"><br><br>
+            所属地区:
+            
+            <select v-model="userinfo.city">
+                <option value="shanghai">上海</option>
+                <option value="dalian">大连</option>
+                <option value="shenyang">沈阳</option>
+            </select><br><br>
+            其他信息
+            <!-- .lazy当失去焦点时候收集数据 -->
+            <textarea name="" id="" cols="30" rows="10" v-model.lazy="userinfo.other"></textarea><br><br>
+            <input type="checkbox" v-model="userinfo.agree"> 阅读并接受<a href="javascript:;">用户协议</a><br><br>
+            <button @click.prevent="demo">提交</button>
+        </form>
+    </div>
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                userinfo: {
+                    user: '',
+                    pwd: '',
+                    age: '',
+                    sex: 'female',
+                    hobby: [], //hobby设置的初始值会影响整个结果 checkedbox默认情况下返回结果为checked的值
+                    city: 'dalian',
+                    other: '',
+                    agree: ''
+                }
+            },
+            methods: {
+                demo(){
+                    console.log(JSON.stringify(this.userinfo));
+                }
+            },
+        })
+    </script>
+</body>
+</html>

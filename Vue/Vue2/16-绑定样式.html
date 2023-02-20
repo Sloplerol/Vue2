@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+    <style>
+        .box {
+            width: 300px;
+            height: 300px;
+            border: 1px solid black;
+        }
+        .blue {
+            background-color: blue;
+        }
+        .green {
+            background-color: aqua;
+        }
+        .yellow {
+            background-color: yellow;
+        }
+
+        .pink {
+            background-color: pink;
+        }
+        .sty1 {
+            margin-left: 40px;
+        }
+        .sty2 {
+            border-radius: 50%;
+        }
+        .sty3 {
+            box-shadow: 4px 4px 0 4px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="root" @click="changeBack"> 
+        <!-- :class绑定样式 -->
+        <div class="box" :class="a" @click="changeBack">
+            你好{{name}}!!!
+        </div>
+        <!-- :class绑定数组 适用于要绑定样式的个数和名字不确定-->
+        <div class="box" :class="arr"></div>
+        <!-- :class绑定对象  绑定样式和名字全部确定但要动态开启样式 -->
+        <div class="box" :class="obj"></div>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                name: 'zjj',
+                a: 'pink',
+                arr: ['sty1','sty2','sty3'],
+                obj: {
+                    sty1: false,
+                    sty2: false
+                }
+            },
+            methods: {
+                changeBack(){
+                    const mood = ['blue','yellow','green'];
+                    const index = Math.floor(Math.random()*3);
+                    this.a = mood[index];
+                }
+            },
+            
+        })
+    </script>
+</body>
+</html>

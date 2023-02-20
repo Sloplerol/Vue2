@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .inner {
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+        }
+    </style>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <a href="https://www.baidu.com" @click.prevent="showinfo">点击触发</a> 
+        <!-- 阻止链接跳转的默认行为 -->
+        <div class="inner" @click="showinfo">
+            <!-- 阻止冒泡 -->
+            <button @click.stop="showinfo">点击冒牌</button>
+        </div>
+        <!-- 事件只触发一次 -->
+        <button @click.once="showinfo">Once</button>
+        <!-- 使用捕获模式 -->
+        <div class="box1" @click.capture="showmsg(1)">
+            ads
+            <div class="box2" @click.capture="showmsg(2)">
+                asd
+            </div>
+        </div>
+        <!-- 只有event.target是当前操作元素时才触发的事件 -->
+        <div class="box3" @click.self="showinfo">
+            <button @click="showinfo">点击</button>
+        </div>
+        <!-- @wheel.passive优先响应结果再计算过程 -->
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                name: 'dasanbing'
+            },
+            methods: {
+                showinfo(e){
+                    // e.preventDefault();
+                    // e.stopPropagation();
+                    // alert('你好世界');
+                    console.log(e.target);
+                },
+                showmsg(msg){
+                    console.log(msg);
+                }
+                
+            }
+        })
+    </script>
+</body>
+</html>

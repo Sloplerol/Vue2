@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <!-- MVVM模型
+    M data model数据
+    V 视图模版代码
+    VM 视图模型 Vue实例 想当于中间的桥梁 -->
+    <div id="root">
+        <h3>test1:{{name}}</h3>
+        <h3>test2:{{address}}</h3>
+        <h3>test3:{{_isVue}}</h3>
+        <h3>test4:{{$forceUpdate}}</h3>
+        <!-- 总结 插值语法插入的值都是Vue里面的属性和方法 -->
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#root',
+            //data数据相当于是往vm里添加name和address属性
+            data: {
+                name: 'zjj',
+                address: 'Calfornia'
+            }
+        })
+    </script>
+</body>
+</html>

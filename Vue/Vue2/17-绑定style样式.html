@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            border: 1px solid pink;
+        }
+        .red {
+            background-color: red;
+        }
+        .shadow {
+            box-shadow: 4px 4px 0 4px rgba(0,0,0,0.4);
+        }
+        .border {
+            border: 1px solid black;
+        }
+        .sty1 {
+            margin-left: 200px;
+        }
+        .sty2 {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <div :class="arr" class="box"></div>
+        <div class="box" :class="obj"></div>
+        <!-- style样式都是采取驼峰命名法来书写的 -->
+        <div class="box" :style="{fontSize: fsize+'px'}">1221</div>
+        <div class="box" :style="styObj">asd</div>
+    </div>
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                a: 'red',
+                arr: ['red','shadow','border'],
+                obj: {
+                    sty1: false,
+                    sty2: false
+                },
+                fsize: 40,
+                styObj: {
+                    fontSize: '40px',
+                    backgroundColor: 'red'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

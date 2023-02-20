@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        今年{{age}}岁
+        <button @click="n++">点击按钮n++</button>
+        <div>这是放大后的n: <span v-big="n"></span></div>
+        <div>这是n:<span v-text="n"></span></div>
+
+        <!-- v-lind实现输入框自动聚焦和值的动态变化 -->
+        <input type="text" v-lind="n">
+        <input type="text" v-big-name="n"> 
+        <!-- 当命名时候出现两个单词都需要小写要用-分隔 -->
+    </div>
+    <div id="root1">
+        <input type="text" v-lind="x">
+    </div>
+    <script>
+        // 设置对象为全局指令
+        Vue.directive('lind',{
+                    //绑定时候
+                    bind(element,binding){
+                        element.value = binding.value;
+                    },
+                    // 插入到页面的时候
+                    inserted(element,binding){
+                        element.focus();
+                        // 自动focus发生在插入页面之后
+                    },
+                    // Vue重新解析页面元素的时候
+                    update(element,binding){
+                        element.value = binding.value;
+                        element.focus();
+
+                    }
+                    // 正常情况下只包含了初始绑定和重新解析元素 所以在往函数里写入focus时默认情况下属于绑定的时候
+                } )
+
+        //设置函数为全局指令
+        Vue.directive('big',function(element,binding){
+                    console.log(this);
+                    // element代表v-big存在的元素标签 binding代表v-big和span标签进行绑定
+                    element.innerHTML = binding.value*10
+                    // big函数何时被调用 绑定后就被调用 当指令所在的模版被重新解析时
+                })
+        new Vue({
+            el: '#root',
+            data: {
+                n: 1,
+                age: 29
+            },
+            directives: {
+                //指令里面的this指向的都是window
+                big(element,binding){
+                    console.log(this);
+                    // element代表v-big存在的元素标签 binding代表v-big和span标签进行绑定
+                    element.innerHTML = binding.value*10
+                    // big函数何时被调用 绑定后就被调用 当指令所在的模版被重新解析时
+                },
+                lind: {
+                    //绑定时候
+                    bind(element,binding){
+                        element.value = binding.value;
+                    },
+                    // 插入到页面的时候
+                    inserted(element,binding){
+                        element.focus();
+                        // 自动focus发生在插入页面之后
+                    },
+                    // Vue重新解析页面元素的时候
+                    update(element,binding){
+                        element.value = binding.value;
+                        element.focus();
+
+                    }
+                    // 正常情况下只包含了初始绑定和重新解析元素 所以在往函数里写入focus时默认情况下属于绑定的时候
+                },
+                //完整指令的写法
+                'big-name': function(element,binding){
+                    element.value = binding.value;
+                }
+            }
+        })
+        new Vue({
+            el: '#root1',
+            data: {
+                x: 2
+            }
+        })
+    </script>
+</body>
+</html>

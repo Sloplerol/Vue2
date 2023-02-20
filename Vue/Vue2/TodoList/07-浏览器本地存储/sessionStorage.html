@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    sessionStoage
+    <button onclick="store()">点击进行本地存储</button>
+    <button onclick="get()">点击读取</button>
+    <button onclick="deleteRes()">点击删除</button>
+    <button onclick="clearData()">清空数据</button>
+</body>
+<script>
+    // 清空缓存用户API等操作能删除本地存储
+    function store(){
+        
+        sessionStorage.setItem('person','dacongming');
+        
+    }
+    function get(){
+        //本地存储读取不到数据返回结果为null
+        // console.log(JSON.parse(sessionStorage.getItem('person')));
+        console.log(sessionStorage.getItem('person'));
+    }
+    function deleteRes(){
+        sessionStorage.removeItem('person');
+    }
+    function clearData(){
+        sessionStorage.clear();
+    }
+</script>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <button @click="lookAge">点我看年龄</button>
+        我的名字叫{{name}}<br><span v-if="stu.sex">我今年{{stu.sex}}</span><br>我的年龄是{{age}}
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                name: 'zjj',
+                age: 20,
+                stu: {
+                    name: 'ljm',
+                    age: 2999
+                    //后添加的数据是没有getter和setter的
+                }
+            },
+            methods: {
+                lookAge(){
+                    // Vue.set(this.stu,'sex','男');
+                    this.$set(this.stu,'sex','男'); 
+                    //不允许给将目标值设置为vm或者是vm._data 不让给最外层添加属性和值
+                }
+            },
+        })
+    </script>
+</body>
+</html>

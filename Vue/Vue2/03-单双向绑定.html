@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- 单项绑定<input type="text" v-bind:value="tot"><br> //当修改数据的值原数据里的值不发生修改
+        双向绑定<input type="text" v-model:value="tot"> //一起发生修改--> 
+        <!-- 简写 -->
+        单项绑定<input type="text" :value="tot"><br> 
+        <!-- v-model默认获取的就是value值 -->
+        双向绑定<input type="text" v-model="tot">
+    </div>
+    <script>
+        const v = new Vue({
+            el: '#root',
+            data: {
+                name: '姓名',
+                tot: '请输入值'
+            }
+        })
+    </script>
+</body>
+</html>

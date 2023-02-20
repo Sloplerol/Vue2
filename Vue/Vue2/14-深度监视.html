@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2>My name = {{name}}</h2>
+        <button @click="number.a++">点我让a+1</button><span> a:{{number.a}}</span><br><br>
+        <button @click="number.b++">点我让b+1</button><span> b:{{number.b}}</span><br><br>
+        <button @click="number = {a:200,b:300}">点我全局发生变化</button>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                name: 'zjj',
+                number: {
+                    a : 1,
+                    b : 2
+                }
+            },
+            // watch: {
+            //     // 'number.a': {
+            //     //     handler(){
+            //     //         console.log('a的值发生了变化');
+            //     //     }
+            //     // }
+            //     'number': {
+            //         deep: true, //开启深度监视 还会看number里面的值
+            //         handler(){
+            //             console.log('number的值发生了变化');
+            //         }
+            //     }
+            // }
+            //Vue可以检测多层级内的数据发生改变但是watch监视不能若想行深度监视
+        })
+        vm.$watch('number',function(oldValue,newValue){
+            console.log('number的值被修改了',oldValue,newValue);
+        }
+        )
+        //简写模式下不能配置属性
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        
+    </div>
+    
+    <script>
+        //得先有子组件父组件才能注册组件
+        const stu = Vue.extend({
+            template: `
+            <div>
+                <h1>学生的姓名叫{{name}}</h1>
+                <h1>学生的年龄{{age}}</h1>
+            </div>
+            `,
+            data(){
+                return {
+                    name: 'zjj',
+                    age: 29
+                }
+            },
+            
+        })
+        const school = Vue.extend({
+            template: `
+            <div>
+                <h1>学校的姓名叫{{name}}</h1>
+                <h1>学校的地址{{address}}</h1>
+                <stu></stu>
+            </div>
+            `,
+            data(){
+                return {
+                    name: 'zhicheng',
+                    address: 'dalian'
+                }
+            },
+            components: {
+                stu
+            }
+
+        })
+        const hello = Vue.extend({
+            template: `
+            <div>
+                <h4>欢迎学习Vue</h4>
+            </div>
+            `
+            
+        })
+
+        // app组件管理所有组件 vm之下 其他组件之上
+        const app = Vue.extend({
+            template: `
+            <div>
+                <school></school>
+                <hello></hello>
+            </div>
+            `,
+            components: {
+                school,
+                hello
+    
+            }
+            
+        })
+        new Vue({
+            template: `<app></app>`,
+            el: '#root',
+            data: {
+                name: 'zjj'
+            },
+            components: {app}
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <ul>
+            <button @click="add">点击添加一只老b灯</button>
+            <!-- 没有写key的话key的值默认情况下就是index的值 -->
+            <li v-for="(p,index) in person" :key="index">
+                <!-- 如果数据是往后添加的纳闷不写key是没有影响的 -->
+                {{p.name}}---{{p.age}}; <input type="text">
+                <!-- 如果是逆向添加并且key的值是index的值 当添加的时候每个数据由于与之对应的key值不同还需要重新再添加一遍 -->
+                <!-- 如何选择key 设置唯一标识的值 -->
+            </li>
+        </ul>
+    </div>
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                person: [
+                    {id:001,name:'zjj',age:19},
+                    {id:002,name:'ljm',age:209},
+                    {id:003,name:'ldh',age:229}
+
+                ]
+            },
+            methods: {
+                add(){
+                    const l = {id:004,name:'lbd',age:29};
+                    this.person.unshift(l);
+                }
+            },
+        })
+    </script>
+</body>
+</html>

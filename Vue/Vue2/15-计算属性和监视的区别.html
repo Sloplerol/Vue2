@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 计算属性能解决的watch侦听一定能解决反之则不一定 watch监听可以执行异步任务
+        // 计算属性设置异步任务后返回值是属于异步任务 自身丢失了返回值
+        // 被Vue管理的函数 最好是普通函数 此时this指向为vm
+        // 不被Vue管理时 setTimeout/ajax回调最好是箭头函数 防止this指向window
+        // 总而言之因情况而定最终让this都指向为vm
+        
+    </script>
+</body>
+</html>

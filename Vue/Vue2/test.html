@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <school></school>
+
+    </div>
+    <script> 
+        Vue.prototype.x  = 10
+        const school = Vue.extend({
+            template: `
+            <div>
+                <h1>欢迎Studing{{con}}</h1>
+                <button @click="showX">点击获取x</button>
+                <h1>x:{{y}}</h1>
+            </div>
+            `,
+            data(){
+                return {
+                    con: 'Vue',
+                    y: ''
+                }
+            },
+            methods: {
+                showX(){
+                    this.y = this.x;
+                
+                }
+            },
+        
+        })
+        const vm = new Vue({
+            el: '#root',
+            components: {school},
+            data(){
+                return {
+                    x: 2
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- 插入的参数的值必须是一个js表达式 -->
+        <h1>{{url.name}}看我{{name.toUpperCase()}}出身画册i come from asd</h1>
+    </div>
+    <div id="root1">
+        <h1>看你个锤子看我{{address}}</h1>
+        <!-- v-bind将后面的值绑定为js表达式(变量) 可以简写成:-->
+        <a v-bind:href="url" v-bind:x=hello>通往天堂之路</a>
+    </div>
+    <script>
+        const v = new Vue({
+            el: '#root',
+            data: {
+                name: 'Luoxia',
+                url: {
+                    name: 'zjj'
+                    
+                }
+                // 当再次以对象的形式嵌套一层
+                
+            }
+        })
+        const a = new Vue({ 
+            el: '#root1',
+            data: {
+                address: 'shenyang',
+                url: 'https://www.baidu.com',
+                hello: 'asd'
+            }
+        })
+        //实例对象和容器是一一对应的 不要出现一对多的情况
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <script>
+        let like = '喜欢敲代码';
+        let person = {
+            rname: 'zjj',
+            age: '28'
+        }
+        Object.defineProperty(person,'hobby',{
+            // value: 'coding',
+            // enumerable: true, //解决不可枚举的方法
+            // writable: true, //可以修改person属性值
+            // configurable: true //控制属性是否可以被删除
+            //当读取到hobby属性的时候 getter函数就会被调用 返回结果就是hobby的属性值
+            get:function(){
+                console.log('有人读取hobby属性了');
+                return like;
+            },
+            // 当有人修改了hobby属性值的时候会触发setter函数
+            set(value){
+                // 虽然修改了hobby的值但是本质上hobby是继承了like的值需要修改like的值才行
+                like = value;
+                console.log('有人修改了setter属性值是',value);
+                
+            }
+        })
+        // 通过defineproperty添加的属性是不可枚举的 即不可遍历的
+        // console.log(person);
+        
+
+        //以下两种方法都是无法获取到hobby属性的
+        // console.log(Object.keys(person)); 
+
+        // for(let i in person) {
+        //     console.log(i);
+        // }
+    </script>
+</body>
+</html>

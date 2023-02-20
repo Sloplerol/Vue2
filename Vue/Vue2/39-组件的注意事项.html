@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- 保持和Vue控制台组件的姓名一致 -->
+        <!-- <Rname></Rname> -->
+        <!-- 如果想写多个单词的组件标签名需要都小写加- -->
+        <r-name></r-name>
+        <!-- <r-name/> 在Vue脚手架的时候写否则容易出bug -->
+    </div>
+    <script>
+        // const rname = Vue.extend({
+        //     name: 'Vuekaifa', //可以使用name指定组件的名字
+        //     template: `
+        //     <div>
+        //         <h1>my name is {{name}}</h1>
+        //     </div>
+        //     `,
+        //     data(){
+        //         return {
+        //             name: 'zjj'
+        //         }
+        //     }
+        // })
+        //创建组件的时候可以不写Vue.extend vue.js里做了if判断如果你没有给你加 如果加了直接在创建的时候使用
+        const rname = {
+            name: 'Vuekaifa', //可以使用name指定组件的名字
+            template: `
+            <div>
+                <h1>my name is {{name}}</h1>
+            </div>
+            `,
+            data(){
+                return {
+                    name: 'zjj'
+                }
+            }
+        }
+        new Vue({
+            el: '#root',
+            data: {
+                name: 'faky'
+            },
+            components: {
+                'r-name': rname
+                // 如果想要写成大驼峰多单词的形式需要Vue脚手架
+                // 不要使用html的标签名作为组件名
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2>今天天气很{{info}}</h2>
+        <!-- 当这里面没有插入计算属性的时候按钮点击Vue开发工具没有反应而vm还是发生改变的 -->
+        <button @click="isHot = !isHot">切换天气</button> 
+        <!-- 可以直接将js表达式写到事件里面 前提是他是属于vm对象的-->
+    </div>
+    
+    <script>
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                isHot: true
+            },
+            methods: {
+                // change(){
+                //     this.isHot = !this.isHot
+                // }
+            },
+            computed: {
+                info(){
+                    return this.isHot ? '炎热' : '凉爽';
+                }
+            },
+            // watch: {
+        //         isHot: {
+        //             immediate: true, //初始化的时候调用获取一下初步数据
+        //             // 当isHot发生改变的时候调用handler函数
+        //             handler(newValue,oldValue){
+        //                 console.log('isHot被修改了',newValue,oldValue);
+        //             }
+        //         }
+        //     }
+        })
+        // 外部$监视
+        // 因为对象里属性名本来就有引号只是我们省略了
+        vm.$watch('isHot', {
+                    immediate: true, //初始化的时候调用获取一下初步数据
+                    // 当isHot发生改变的时候调用handler函数
+                    handler(newValue,oldValue){
+                        console.log('isHot被修改了',newValue,oldValue);
+                    }
+                })
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <ul>
+            <input type="search" v-model="keyWord">
+            <button @click="sortType=2">升序</button>
+            <button @click="sortType=1">降序</button>
+            <button @click="sortType=0">按照原顺序</button>
+            <li v-for="(p,index) of filperson" :key="index">
+                {{p.name}} --- {{p.age}}
+            </li>
+        </ul>
+    </div>
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                sortType: 0, //1代表降序 2代表升序
+                keyWord: '',
+                person: [
+                    {id:001,name:'马冬梅',age:29},
+                    {id:002,name:'马哥了个笔',age:39},
+                    {id:003,name:'哥了个鸡',age:19}
+                    
+                ]
+            },
+            computed: {
+                filperson(){
+                    const arr = this.person.filter((p)=>{
+                        return p.name.indexOf(this.keyWord)!==-1
+                    })
+                    // 对查找后的结果再进行排序
+                    if(this.sortType) {
+                        arr.sort((a,b)=>{
+                        return this.sortType===1 ? b.age-a.age : a.age-b.age;
+                    })
+                    }
+                    return arr;
+                }
+                
+            }
+        })
+        // 升序排列 
+        // let arr = [2,4,2,4,6,3];
+        // arr.sort((a,b)=>{
+        //     return a-b;
+        // })
+        // console.log(arr);
+    </script>
+</body>
+</html>

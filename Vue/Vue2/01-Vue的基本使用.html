@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin="anonymous" src="/vue.js"></script>
+</head>
+<body>
+    <!-- Vue模版 -->
+    <div id="root"> 
+        <h1>多次见面难免有些小意思,我是{{name}}</h1> 
+        <!-- {{参数}}有着插入字段的作用 -->
+    </div>
+    <script>
+        // 创建一个Vue实例化对象
+        const v = new Vue({
+            el: '#root', //搭建与标签容器的桥梁
+            data: { //data存储数据供el所关联的容器去使用
+                name: 'zjj'
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <button @click="age++">点击年龄加1</button><br><br>
+        <button @click="addSex">添加性别</button><br><br>
+        <button @click="dt.sex='女'">修改性别</button><br><br>
+        <button @click="addFriend">在列表首位添加朋友</button><br><br>
+        <button @click="changeFriend">修改数组里第一个朋友的属性</button><br><br>
+        <button @click="addhobby">添加一个爱好</button>
+        <button @click="changehobby">修改第一个爱好</button>
+        <button @click="filiterBadhabit">过滤掉坏习惯</button>
+        <div>
+            我的年龄是{{age}}<br>
+            <span v-for="(p,index) of friend" :key="index">我有的朋友是{{p}}<br></span><br>
+            <span v-if="dt.sex">我的性别是{{dt.sex}}</span>
+            <span v-for="(h,index) of stu" :key="index">{{h}}</span>
+            
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                name: 'zjj',
+                age: 10,
+                dt: {
+
+                },
+                friend: [
+                    {name:'ldm',age:19},
+                    {name:'ldh',age:29},
+                    {name:'ljm',age:39},
+
+                ],
+                stu: ['学习','吃饭','打游戏']
+            },
+            methods: {
+                addSex(){
+                    Vue.set(this.dt,'sex','男');
+                },
+                addFriend(){
+                    this.friend.unshift({name:'zjjun',age:30});
+                },
+                changeFriend(){
+                    this.friend[0].name = 'dgb'
+                },
+                addhobby(){
+                    this.stu.push('打豆豆');
+                },
+                changehobby(){
+                    // Vue.set(this.stu,0,'gan')
+                    //splice从第一个删起删一个换乘gan
+                    this.stu.splice(0,1,'gan')
+                },
+                filiterBadhabit(){
+                    this.stu = this.stu.filter((i)=>{
+                        return i!=='吃饭';
+                    })
+                }
+            },
+        })
+    </script>
+</body>
+</html>

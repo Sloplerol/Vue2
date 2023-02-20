@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <school></school>
+    </div>
+    <script>
+        // 只有函数才拥有显示原型对象
+        // 只有对象才有隐式原型对象
+        // function Fn(a,b) {
+        //     this.a = a;
+        //     this.b = b;
+        // }
+        // const d = new Fn();
+        
+        // console.log(Fn.prototype); //显示原型属性
+        // console.log(d.__proto__); //隐式原型属性
+        // console.log(Fn.prototype===d.__proto__);
+
+        // Fn.prototype.x = 20; //程序员通过显示原型属性追加x
+        // console.log(d);
+        // console.log(d.x); //找的时候走隐式原型链来找x属性
+        Vue.prototype.x = 99; 
+        const school = Vue.extend({
+            template: `
+            <div>
+                <h1>我叫{{name}}</h1>
+                <button @click="lookName">点击查看x</button>
+            </div>
+            `,
+            data(){
+                return {
+                    name: 'zjj'
+                }
+            },
+            methods: {
+                lookName(){
+                    console.log(this.x); //VueComponent.prototype.__proto__ === Vue.prototype VC的原型对象的原型对象是Vue的原型对象
+                }
+            },
+        })
+        new Vue({
+            el: '#root',
+            data: {
+                
+            },
+            components: {
+                school
+            }
+        })
+    </script>
+</body>
+</html>

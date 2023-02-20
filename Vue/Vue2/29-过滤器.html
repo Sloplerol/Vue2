@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>过滤器应用场景为插值语法和v-bind</title>
+    <script src="/vue.js"></script>
+    <script src="/day.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- 计算属性实现 -->
+        <h3>现在是{{fullTime}}</h3>
+        <!-- methods实现 -->
+        <h3>现在是{{fmtTime()}}</h3>
+        <!-- 利用过滤器来实现 将time作为参数传给timemanager 最终结果覆盖全部-->
+        <h3>现在是{{time | timemanager('YYYY_MM_DD') | myslice}}</h3>
+        <!-- <input type="text" v-model="name | myslice"> 过滤器不能用在v-model上 -->
+    </div>
+    <div id="root1">
+        {{name | myslice}}
+        <h3 :x="name | myslice">asdsa</h3>
+    </div>
+    <script>
+        //配置全局过滤器
+        Vue.filter('myslice',function(value){
+            return value.slice(0,4);
+        })
+        new Vue({
+            el: '#root',
+            data: {
+                time: 1671867174290,
+                name: 'woshinibb'
+            },
+            computed: {
+                fullTime(){
+                    return dayjs(this.time).format('YYYY年MM月DD日 HH:mm:ss');
+                }  
+            },
+            methods: {
+                fmtTime(){
+                    return dayjs(this.time).format('YYYY年MM月DD日 HH:mm:ss');
+                }
+            },
+            // 局部过滤器只能在当前Vue实例里面使用 
+            filters: {
+                // timemanager(value,str){
+                //     return dayjs(value).format('YYYY年MM月DD日 HH:mm:ss');
+                // },
+                // es6设置默认值在有值的情况下按那个来没值默认就这个
+                timemanager(value,str='YYYY年MM月DD日 HH:mm:ss' ){
+                    return dayjs(value).format(str);
+                },
+                // myslice(value){
+                //     return value.slice(0,4);
+                // }
+            }
+        })
+        new Vue({
+            el: '#root1',
+            data: {
+                name: 'asdasd'
+            }
+        })
+    </script>
+</body>
+</html>

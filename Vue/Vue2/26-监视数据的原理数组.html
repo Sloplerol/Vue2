@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>爱好</h1>
+        <span v-for="(p,index) of stu">
+            {{p}}
+        </span>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                name: 'zjj',
+                stu: ['coding','studing','eating'] //数组里面的数据是不具备setter和getter的 只能通过七种对数组操作的方法进行修改
+                // Vue里的这些方法在原型的基础上添加了响应式
+                // 数组修改还可以通过Vue.set方法进行修改 Vue.set(vm.stu,1,'修改后的内容')
+            }
+        })
+    </script>
+</body>
+</html>
